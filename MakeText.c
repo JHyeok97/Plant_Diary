@@ -3,7 +3,7 @@
 // 첫 페이지 프린트 하는 함수
 void Print_Title(void)
 {
-    
+    puts("테스트 입니다.")
 }
 // 파일 이름 정하는 함수
 int Get_Date_File_Name(void)
