@@ -18,6 +18,7 @@ void Scan_Description(char description[])
 // 일기를 txt 파일에 저장하는 함수
 void Put_Diary(int date, char description[])
 {
+    puts("일기를 텍스트 파일에 저장합니다");
 }
 
 // 일기를 txt 파일로부터 가져오는 함수
