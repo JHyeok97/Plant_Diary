@@ -15,7 +15,7 @@ void Scan_Description(char description[])
 }
 
 // 일기를 txt 파일에 저장하는 함수
-void Put_Diary(int date, char description)
+void Put_Diary(int date, char description[])
 {
 }
 
