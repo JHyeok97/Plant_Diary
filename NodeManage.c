@@ -71,8 +71,8 @@ Node *txt_Search()
     for (int i = 1; temp != NULL; i++)
     {
         Node *temp = head;
-        printf("");
-        }
+        printf("kk");
+    }
 }
 
 // txt 파일 편집하는 함수
