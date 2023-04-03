@@ -4,12 +4,11 @@
 #include <time.h>
 #include <string.h>
 
-
-typedef struct Text_Name
+typedef struct Node
 {
-    char name[16];
-    struct Text_Name *next;
-} Text_Name;
+    char *name;
+    struct Node *next;
+} Node;
 
 void Print_Title(void);
 int Get_Date_File_Name(void);
