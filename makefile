@@ -9,3 +9,7 @@ MakeText.o: MakeText.h MakeText.c
 
 NodeManage.o: MakeText.h NodeManage.c
 	gcc -c -o NodeManage.o NodeManage.c
+
+clean:
+	rm -f *.out
+	rm -f *.o
