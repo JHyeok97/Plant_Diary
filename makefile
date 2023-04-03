@@ -14,3 +14,5 @@ clean:
 	rm -f *.out
 	rm -f *.o
 test:
+
+test2:
