@@ -13,3 +13,4 @@ NodeManage.o: MakeText.h NodeManage.c
 clean:
 	rm -f *.out
 	rm -f *.o
+test:
