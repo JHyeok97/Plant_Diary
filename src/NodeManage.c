@@ -68,11 +68,8 @@ Node *txt_Search()
     }
     system("clear");
 
-    for (int i = 1; temp != NULL; i++)
-    {
-        Node *temp = head;
-        printf("kk");
-    }
+    temp = head;
+    printf("%d", Get_Date_File_Name());
 }
 
 // txt 파일 편집하는 함수

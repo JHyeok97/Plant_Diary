@@ -1,15 +1,16 @@
-app.out: Plant_Diary.o MakeText.o NodeManage.o
-	gcc -o app.out Plant_Diary.o MakeText.o NodeManage.o
+SRCS_DIR := ./src
+BUILD_DIR := ./build
 
-Plant_Diary.o: MakeText.h MakeText.h Plant_Diary.c
-	gcc -c -o Plant_Diary.o Plant_Diary.c
+SRCS := $(shell find $(SRCS_DIR) -name "*.c")
+OBJS := $(subst $(SRCS_DIR),$(BUILD_DIR),$(SRCS))
+OBJS := $(OBJS:.c=.o)
 
-MakeText.o: MakeText.h MakeText.c
-	gcc -c -o MakeText.o MakeText.c
+app.out: $(OBJS)
+	gcc $(OBJS) -o $@
 
-NodeManage.o: MakeText.h NodeManage.c
-	gcc -c -o NodeManage.o NodeManage.c
+build/%.o : src/%.c
+	gcc -c $< -o $@
 
 clean:
-	rm -f *.out
-	rm -f *.o
+	rm -f app.out
+	rm -f build/*.o
