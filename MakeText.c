@@ -7,6 +7,7 @@ void Print_Title(void)
 // 파일 이름 정하는 함수
 int Get_Date_File_Name(void)
 {
+    puts("테스트 합니다.");
 }
 
 // 일기 내용 입력하는 함수
