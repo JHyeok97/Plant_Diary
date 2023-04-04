@@ -12,6 +12,34 @@ void Print_Title(void)
     puts("1. 입력하기");
     puts("2. 끝내기");
 }
+
+//폴더 페이지 프린트하는 함수
+void Print_folder(void){
+
+ char diary[] = {"식물 일기장"};
+
+    puts(" ");
+    printf("\t\t%s\n", diary);
+    puts(" ");
+
+    puts("1. 폴더 추가");
+    puts("2. 폴더 삭제");
+    puts("3. 이전 페이지\n\n");
+
+}
+
+//텍스트를 프린트하는 함수
+void Print_Text(char *folder_name){
+     
+    puts(" ");
+    printf("\t\t%s\n", &folder_name);
+    puts(" ");
+
+    puts("1. 일기 작성");
+    puts("2. 일기 삭제");
+    puts("3. 처음 화면\n\n");
+}
+
 // 파일 이름 정하는 함수
 int Get_Date_File_Name(void)
 {
@@ -44,4 +72,6 @@ int Get_Diary(int date, char description[])
 void Make_Folder(void)
 {
     puts("폴더를 생성합니다.");
+
+
 }
