@@ -3,6 +3,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
+#include <stdlib.h>
+#include <sys/stat.h>
 
 
 typedef struct Text_Name

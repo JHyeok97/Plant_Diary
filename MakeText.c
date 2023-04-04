@@ -27,12 +27,12 @@ void Put_Diary(int date, char description[])
 {
     char filename[20];
     FILE *fp = NULL;
-    scanf("%s",&filename);
-
+    
     sprintf(filename, "%d", date);
     strcat(filename,".txt");
-    fp=
-    fprintf()
+    fp=fopen(filename, "w");
+    fprintf(fp,"%s",description);
+    fclose(fp);
 }
 
 // 일기를 txt 파일로부터 가져오는 함수
