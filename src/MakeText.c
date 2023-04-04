@@ -70,14 +70,15 @@ int Get_Diary(int date, char description[])
 }
 
 // 폴더 만드는 함수
-void Make_Folder(void)
+void Make_Folder(char *folder_name)
 {
-    char* folder_name = "내_폴더";
+    getc(folder_name);
     int result = mkdir(folder_name, 0777);
-    if (result == -1) {
+    if (result == -1)
+    {
         printf("폴더 생성 실패.\n");
         return -1;
     }
-    printf("폴더 생성 성공.\n");
+    printf("%s 폴더 생성 성공.\n");
     return 0;
 }
