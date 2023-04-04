@@ -13,10 +13,11 @@ void Print_Title(void)
     puts("2. 끝내기");
 }
 
-//폴더 페이지 프린트하는 함수
-void Print_folder(void){
+// 폴더 페이지 프린트하는 함수
+void Print_folder(void)
+{
 
- char diary[] = {"식물 일기장"};
+    char diary[] = {"식물 일기장"};
 
     puts(" ");
     printf("\t\t%s\n", diary);
@@ -25,12 +26,12 @@ void Print_folder(void){
     puts("1. 폴더 추가");
     puts("2. 폴더 삭제");
     puts("3. 이전 페이지\n\n");
-
 }
 
-//텍스트를 프린트하는 함수
-void Print_Text(char *folder_name){
-     
+// 텍스트를 프린트하는 함수
+void Print_Text(char *folder_name)
+{
+
     puts(" ");
     printf("\t\t%s\n", &folder_name);
     puts(" ");
@@ -43,7 +44,6 @@ void Print_Text(char *folder_name){
 // 파일 이름 정하는 함수
 int Get_Date_File_Name(void)
 {
-    puts("테스트 합니다.");
 }
 
 // 일기 내용 입력하는 함수
@@ -56,11 +56,11 @@ void Put_Diary(int date, char description[])
 {
     char filename[20];
     FILE *fp = NULL;
-    
+
     sprintf(filename, "%d", date);
-    strcat(filename,".txt");
-    fp=fopen(filename, "w");
-    fprintf(fp,"%s",description);
+    strcat(filename, ".txt");
+    fp = fopen(filename, "w");
+    fprintf(fp, "%s", description);
     fclose(fp);
 }
 
@@ -72,7 +72,12 @@ int Get_Diary(int date, char description[])
 // 폴더 만드는 함수
 void Make_Folder(void)
 {
-    puts("폴더를 생성합니다.");
-
-
+    char* folder_name = "내_폴더";
+    int result = mkdir(folder_name, 0777);
+    if (result == -1) {
+        printf("폴더 생성 실패.\n");
+        return -1;
+    }
+    printf("폴더 생성 성공.\n");
+    return 0;
 }
