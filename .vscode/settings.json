@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "maketext.h": "c",
+        "stdio.h": "c"
+    }
+}

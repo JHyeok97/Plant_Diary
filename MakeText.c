@@ -3,7 +3,11 @@
 // 첫 페이지 프린트 하는 함수
 void Print_Title(void)
 {
-    printf("\n\t\t식물 일기장\n\n");
+    char diary[] = {"식물 일기장"};
+
+    puts(" ");
+    printf("\t\t%s\n", diary);
+    puts(" ");
 
     puts("1. 입력하기");
     puts("2. 끝내기");
@@ -21,7 +25,14 @@ void Scan_Description(char description[])
 // 일기를 txt 파일에 저장하는 함수
 void Put_Diary(int date, char description[])
 {
-    puts("일기를 텍스트 파일에 저장합니다");
+    char filename[20];
+    FILE *fp = NULL;
+    scanf("%s",&filename);
+
+    sprintf(filename, "%d", date);
+    strcat(filename,".txt");
+    fp=
+    fprintf()
 }
 
 // 일기를 txt 파일로부터 가져오는 함수
