@@ -79,6 +79,6 @@ void Make_Folder(char *folder_name)
         printf("폴더 생성 실패.\n");
         return -1;
     }
-    printf("%s 폴더 생성 성공.\n");
+    printf("%s 폴더 생성 성공.\n", &folder_name);
     return 0;
 }
