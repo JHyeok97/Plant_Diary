@@ -3,9 +3,10 @@
 // 첫 페이지 프린트 하는 함수
 void Print_Title(void)
 {
-    printf("\n\t\t식물 일기장\n");
+    printf("\n\t\t식물 일기장\n\n");
 
-
+    puts("1. 입력하기");
+    puts("2. 끝내기");
 }
 // 파일 이름 정하는 함수
 int Get_Date_File_Name(void)
