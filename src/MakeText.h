@@ -10,8 +10,12 @@ typedef struct Node
     struct Node *next;
 } Node;
 
-void Print_Title(void);
-int Get_Date_File_Name(void);
+void Print_Title();
+int Get_Date_File_Name();
 void Scan_Description(char[]);
 void Put_Diary(int, char[]);
 int Get_Diary(int, char[]);
+void Add(char*);
+void Delete(char*);
+void List();
+void txt_Edit();

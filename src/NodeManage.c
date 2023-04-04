@@ -45,7 +45,7 @@ void List()
 }
 
 // 원하는 정보 찾는 함수
-Node *txt_Search()
+/*Node *txt_Search()
 {
     int year, month, day, date;
     Node *temp;
@@ -53,8 +53,8 @@ Node *txt_Search()
 
     printf("날짜를 입력해주세요(YYYY MM DD):\n");
     scanf("%d %d %d", &year, &month, &day);
-    date = (year * 10000 + month * 100 + day);
     system("clear");
+    date = (year * 10000 + month * 100 + day);
 
     for (int i = 20230401; i <= date; i++)
     {
@@ -70,7 +70,7 @@ Node *txt_Search()
 
     temp = head;
     printf("%d", Get_Date_File_Name());
-}
+}*/
 
 // txt 파일 편집하는 함수
 void txt_Edit()
