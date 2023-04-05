@@ -73,6 +73,7 @@ void List()
 }*/
 
 // txt 파일 편집하는 함수
-void txt_Edit()
+/*void txt_Edit()
 {
 }
+*/
