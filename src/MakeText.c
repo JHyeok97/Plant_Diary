@@ -68,6 +68,9 @@ void Scan_Description(char description[])
   getchar();
   printf("%s(0/%d)\n", guide, MAX_LENGTH - 1);
 
+
+
+
   // getchar() 내 enter(\n) 입력, MAX_LENGTH 초과, EOF 일 때 입력 종료
   while ((ch = getchar()) != EOF)
   {
@@ -97,17 +100,16 @@ void Scan_Description(char description[])
 }
 
 // 일기를 txt 파일에 저장하는 함수
-
 // txt 파일을 지정한 폴더에 저장할 수 있도록 수정//
 void Put_Diary(int date, char description[])
 {
-  char filename[20]; // 문자열 변수 설정
-  FILE *fp = NULL;   // FILE 포인터 변수 선언
+  char filename[20]; 
+  FILE *fp = NULL;   
 
-  sprintf(filename, "%d", date);  // filename에 날짜 입력
-  strcat(filename, ".txt");       // strcat 함수로 붙여넣기
-  fp = fopen(filename, "w");      // file열어 작성하기
-  fprintf(fp, "%s", description); // 내용 작성
+  sprintf(filename, "%d", date); 
+  strcat(filename, ".txt");       
+  fp = fopen(filename, "w");      
+  fprintf(fp, "%s", description); 
   fclose(fp);
 }
 
@@ -135,7 +137,7 @@ int Get_Diary(int date, char description[])
 // 폴더 만드는 함수
 void Make_Folder(char *Folder_Name) // 표준 입력 장치로 받은 이름
 {
-  //gets(Folder_Name);
+  //gets(Folder_Name); 여기다 넣어햐 하나 말아야 하나....
 
   if (mkdir(Folder_Name, 0777) == 0) // 입력받은 이름으로 폴더를 생성한다(0777->읽기, 쓰기, 실행을 가능하게 하는 값.)
   {
