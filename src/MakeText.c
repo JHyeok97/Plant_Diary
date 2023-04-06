@@ -24,9 +24,7 @@ void Print_folder(void)
     printf("\t\t%s\n", diary);
     puts(" ");
 
-    puts("1. 폴더 추가");
-    puts("2. 폴더 삭제");
-    puts("3. 이전 페이지\n\n");
+    puts("1. 폴더 추가\t2. 폴더 삭제\t3. 폴더 들어가기\t4. 이전 페이지\n\n");
 }
 
 // 텍스트를 프린트하는 함수
@@ -37,9 +35,7 @@ void Print_Text(char *folder_name)
     printf("\t\t%s\n", folder_name);
     puts(" ");
 
-    puts("1. 일기 작성");
-    puts("2. 일기 삭제");
-    puts("3. 처음 화면\n\n");
+    puts("1. 일기 작성\t2. 일기 삭제\t3. 이전 화면\n\n");
 }
 
 // 파일 이름 정하는 함수
@@ -135,7 +131,7 @@ int Get_Diary(int date, char description[])
 }
 
 // 폴더 만드는 함수
-void Make_Folder(char foldername[]) // 표준 입력 장치로 받은 이름
+int Make_Folder(char *foldername) // 표준 입력 장치로 받은 이름
 {
     if (mkdir(foldername, 0777) == 0) // 입력받은 이름으로 폴더를 생성한다(0777->읽기, 쓰기, 실행을 가능하게 하는 값.)
     {
@@ -145,7 +141,9 @@ void Make_Folder(char foldername[]) // 표준 입력 장치로 받은 이름
     else
     {
         puts("폴더 생성 실패");
+        return 1;
     }
+    return 0;
 }
 
 void Enter_folder(char *foldername)
@@ -153,6 +151,13 @@ void Enter_folder(char *foldername)
     system("");
 }
 
-void Delete_folder(char *foldername)
+int Delete_folder(char *foldername)
 {
+    int result = rmdir(foldername);
+    if (result == -1)
+    {
+        perror("폴더 삭제 실패");
+        return 1;
+    }
+    return 0;
 }
