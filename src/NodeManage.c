@@ -47,7 +47,6 @@ void List()
     if (head == NULL)
     {
         printf("파일을 찾을 수 없습니다.\n");
-        return 0;
     }
     else
     {
@@ -58,7 +57,7 @@ void List()
             current = current->next;
         }
     }
-    _getch();
+    //getchar();
 }
 
 // 원하는 정보 찾는 함수
