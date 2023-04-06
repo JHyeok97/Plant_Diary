@@ -13,4 +13,4 @@ build/%.o : src/%.c
 
 clean:
 	rm -f app.out
-	rm -f build/*.o
+	rm -f build/*
