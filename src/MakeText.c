@@ -133,14 +133,16 @@ int Get_Diary(int date, char description[])
 }
 
 // 폴더 만드는 함수
-void Make_Folder(char name)
-{ /* 폴더 이름을 입력 받아 배열에 저장하고 그 문자열로 텍스트파일 저장
-     할 수 있도록 하기*/
-    int result = mkdir(name, 0777);
-    if (result == -1)
+void Make_Folder(char *Folder_Name) // 표준 입력 장치로 받은 이름
+{
+    if (mkdir(Folder_Name, 0777) == 0) // 입력받은 이름으로 폴더를 생성한다(0777->읽기, 쓰기, 실행을 가능하게 하는 값.)
     {
-        printf("폴더 생성 실패.\n");
-        return -1;
+        putchar(Folder_Name);
+        printf("폴더를 생성하였습니다.");
     }
-    printf("%s 폴더 생성 성공.\n");
+    else
+    {
+        Puts("폴더 생성 실패");
+    }
+    return 0;
 }
