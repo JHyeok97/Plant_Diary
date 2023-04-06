@@ -92,6 +92,7 @@ void Scan_Description(char description[])
             break;
         }
     }
+    
     description[index + 1] = '\0';
 }
 
