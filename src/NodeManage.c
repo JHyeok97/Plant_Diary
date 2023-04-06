@@ -42,6 +42,23 @@ void Delete(char *name)
 // 리스트 출력해주는 함수
 void List()
 {
+    system("clear");
+
+    if (head == NULL)
+    {
+        printf("파일을 찾을 수 없습니다.\n");
+        return 0;
+    }
+    else
+    {
+        Node *current = head;
+        for (int i = 0; current != NULL; ++i)
+        {
+            printf("파일명:%s", current->name);
+            current = current->next;
+        }
+    }
+    _getch();
 }
 
 // 원하는 정보 찾는 함수
@@ -71,9 +88,3 @@ void List()
     temp = head;
     printf("%d", Get_Date_File_Name());
 }*/
-
-// txt 파일 편집하는 함수
-/*void txt_Edit()
-{
-}
-*/
