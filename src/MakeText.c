@@ -19,6 +19,10 @@ void Print_Title(void)
 void Print_folder(void)
 {
     char diary[] = {"식물 일기장"};
+// 폴더 페이지 프린트하는 함수
+void Print_folder(void)
+{
+    char diary[] = {"식물 일기장"};
 
     puts(" ");
     printf("\t\t%s\n", diary);
@@ -63,39 +67,6 @@ int Get_Date_File_Name(void)
 // 일기 내용 입력하는 함수
 void Scan_Description(char description[])
 {
-    int ch;
-    unsigned int index = 0;
-    char guide[] = "Enter 입력 및 MAX_LENGTH 까지 입력 시 종료";
-
-    getchar();
-    printf("%s(0/%d)\n", guide, MAX_LENGTH - 1);
-
-    // getchar() 내 enter(\n) 입력, MAX_LENGTH 초과, EOF 일 때 입력 종료
-    while ((ch = getchar()) != EOF)
-    {
-        description[index] = ch;
-        index = strlen(description);
-
-        system("clear");
-
-        printf(
-            "%s(%d/%d):%s",
-            guide, index,
-            MAX_LENGTH - 1, description);
-
-        if (index + 1 == MAX_LENGTH - 1)
-        {
-            printf("\nMAX_LENGTH 초과 저장 후 종료");
-            break;
-        }
-        else if ((ch = getchar()) != '\n')
-        {
-            printf("\nEnter 입력, 저장 후 종료");
-            break;
-        }
-    }
-
-    description[index + 1] = '\0';
 }
 
 // 일기를 txt 파일에 저장하는 함수
@@ -135,24 +106,9 @@ int Get_Diary(int date, char description[])
 }
 
 // 폴더 만드는 함수
-void Make_Folder(char foldername[]) // 표준 입력 장치로 받은 이름
+void Make_Folder(void)
 {
-    if (mkdir(foldername, 0777) == 0) // 입력받은 이름으로 폴더를 생성한다(0777->읽기, 쓰기, 실행을 가능하게 하는 값.)
-    {
-        puts(foldername);
-        printf("폴더를 생성하였습니다.");
-    }
-    else
-    {
-        puts("폴더 생성 실패");
-    }
-}
+    puts("폴더를 생성합니다.");
 
-void Enter_folder(char *foldername)
-{
-    system("");
-}
 
-void Delete_folder(char *foldername)
-{
 }
