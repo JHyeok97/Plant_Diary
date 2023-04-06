@@ -1,6 +1,6 @@
 #include "MakeText.h"
+#include "Plant_Diary.c"
 
-#define MAX_LENGTH 1000
 
 // 첫 페이지 프린트 하는 함수
 void Print_Title(void)
@@ -24,7 +24,9 @@ void Print_folder(void)
     printf("\t\t%s\n", diary);
     puts(" ");
 
-    puts("1. 폴더 추가\t2. 폴더 삭제\t3. 폴더 들어가기\t4. 이전 페이지\n\n");
+    puts("1. 폴더 추가");
+    puts("2. 폴더 삭제");
+    puts("3. 이전 페이지\n\n");
 }
 
 // 텍스트를 프린트하는 함수
@@ -32,10 +34,12 @@ void Print_Text(char *folder_name)
 {
 
     puts(" ");
-    printf("\t\t%s\n", folder_name);
+    printf("\t\t%s\n", &folder_name);
     puts(" ");
 
-    puts("1. 일기 작성\t2. 일기 삭제\t3. 이전 화면\n\n");
+    puts("1. 일기 작성");
+    puts("2. 일기 삭제");
+    puts("3. 처음 화면\n\n");
 }
 
 // 파일 이름 정하는 함수
@@ -73,6 +77,7 @@ void Scan_Description(char description[])
         index = strlen(description);
 
         system("clear");
+
         printf(
             "%s(%d/%d):%s",
             guide, index,
@@ -83,13 +88,12 @@ void Scan_Description(char description[])
             printf("\nMAX_LENGTH 초과 저장 후 종료");
             break;
         }
-        else if ((ch = getchar()) != '\n')
+        else if (ch = getcahr() != '\n')
         {
             printf("\nEnter 입력, 저장 후 종료");
             break;
         }
     }
-
     description[index + 1] = '\0';
 }
 
@@ -130,43 +134,52 @@ int Get_Diary(int date, char description[])
 }
 
 // 폴더 만드는 함수
-int Make_Folder(char foldername[]) // 표준 입력 장치로 받은 이름
+void Make_Folder(char *Folder_Name) // 표준 입력 장치로 받은 이름
 {
-    if (mkdir(foldername, 0777) == 0) // 입력받은 이름으로 폴더를 생성한다(0777->읽기, 쓰기, 실행을 가능하게 하는 값.)
+    if (mkdir(Folder_Name, 0777) == 0) // 입력받은 이름으로 폴더를 생성한다(0777->읽기, 쓰기, 실행을 가능하게 하는 값.)
     {
-        puts(foldername);
+        putchar(Folder_Name);
         printf("폴더를 생성하였습니다.");
     }
     else
     {
-        puts("폴더 생성 실패");
-        return 1;
+        Puts("폴더 생성 실패");
     }
     return 0;
 }
 
-int Enter_folder(char foldername[]) // 폴더 이름 받아서 해당 폴더로 이동
+//파일 디텍토리 출력 함수
+//파일 위치 입력 시 . 입력 시 현재 dir 내 filename 입력 시 현재 dir 내 dir 파일명으로 진입
+int Find_List(char *Folder_name)
 {
-    int result = chdir(foldername); // foldername 경로로 이동
+    char file_name[256];
+    char folder_path[256];
+    //folder_path main 입력 된 파일 명 folder_path로 입력, size 크기 지정
+    snprintf(folder_path, sizeof(folder_path), "%s", Folder_name); 
 
-    if (result == 0) // 정상적으로 함수가 작동할 시 0의 값을 반환함
-    {
-        printf("폴더 이동 성공");
-    }
-    else
-    {
-        printf("폴더 이동 실패");
-    }
-    return 0;
-}
+    struct dirent *find_data;
+    DIR *find_handle;
 
-int Delete_folder(char foldername[])
-{
-    int result = rmdir(foldername);
-    if (result == -1)
+    find_handle = opendir(folder_path); //입력 된 dir 파일명을 find_handle로 입력
+    
+    system("clear"); //입력 된 파일명 삭제 후 목록 값 출력을 위한 clear
+
+    if (find_handle == NULL) //find_handle 내 파일명(DIR 구조체의 d_name) 없는 경우
     {
-        perror("폴더 삭제 실패");
-        return 1;
+        printf("파일 없음\n");
+        return 0;
     }
+
+    while ((find_data = readdir(find_handle)) != NULL) //readdir 함수 #include <dirent.h> 된 find_handle 내 값의 dir을 출력
+    {
+        //file_name으로 find_data의 struct dirent의 구조체 파일명 관리(char) d_name의 값을 file name으로 입력
+        snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
+        if (strstr(file_name, ".txt") != NULL) //ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력 
+        {
+            printf("%s\n", file_name);
+        }
+    }
+
+    closedir(find_handle); //열린 dir을 닫아 주는 함수 DIR* find_handle로 지정 되어 find_handle 입력
     return 0;
 }
