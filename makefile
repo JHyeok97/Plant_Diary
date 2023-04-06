@@ -10,3 +10,7 @@ app.out: $(OBJS)
 
 build/%.o : src/%.c
 	gcc -c $< -o $@
+
+clean:
+	rm -f app.out
+	rm -f build/*.o
