@@ -34,7 +34,7 @@ void Print_Text(char *folder_name)
 {
 
     puts(" ");
-    printf("\t\t%s\n", &folder_name);
+    printf("\t\t%s\n", folder_name);
     puts(" ");
 
     puts("1. 일기 작성");
@@ -88,7 +88,7 @@ void Scan_Description(char description[])
             printf("\nMAX_LENGTH 초과 저장 후 종료");
             break;
         }
-        else if (ch = getcahr() != '\n')
+        else if ((ch = getchar()) != '\n')
         {
             printf("\nEnter 입력, 저장 후 종료");
             break;
@@ -135,19 +135,18 @@ int Get_Diary(int date, char description[])
 }
 
 // 폴더 만드는 함수
-void Make_Folder(char *foldername) // 표준 입력 장치로 받은 이름
+void Make_Folder(char foldername[]) // 표준 입력 장치로 받은 이름
 {
     system("cd ../");
     if (mkdir(foldername, 0777) == 0) // 입력받은 이름으로 폴더를 생성한다(0777->읽기, 쓰기, 실행을 가능하게 하는 값.)
     {
-        putchar(foldername);
+        puts(foldername);
         printf("폴더를 생성하였습니다.");
     }
     else
     {
-        Puts("폴더 생성 실패");
+        puts("폴더 생성 실패");
     }
-    return 0;
 }
 
 void Enter_folder(char *foldername)

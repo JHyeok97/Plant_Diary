@@ -21,15 +21,15 @@ int main()
             {
                 Print_folder();
                 // 폴더 리스트 출력 추가할 자리
-                scanf("%d", menu2);
+                scanf("%d", &menu2);
 
                 switch (menu2)
                 {
                 case 1:
                     system("clear");
                     printf("추가할 폴더 이름을 입력하세요.\n");
-                    puts(folderName);
-                    Make_Folder(&folderName);
+                    scanf("%s", folderName);
+                    Make_Folder(folderName);
                     break;
                 case 2: // 폴더 삭제할 함수 만들기
                 case 3: // 폴더 입력하면 들어가는 함수 만들기
