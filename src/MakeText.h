@@ -4,7 +4,6 @@
 #include <time.h>
 #include <string.h>
 #include <sys/types.h>
-#include <sysexits.h>
 #include <sys/stat.h>
 
 typedef struct Node
