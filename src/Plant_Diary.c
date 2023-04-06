@@ -29,7 +29,6 @@ int main()
                 {
                 case 1:
                     system("clear");
-                    chdir("..");
                     chdir("store");
                     printf("추가할 폴더 이름을 입력하세요.\n");
                     scanf("%s", folderName);
@@ -44,6 +43,8 @@ int main()
                     printf("원하는 폴더 이름을 입력하세요.\n");
                     scanf("%s", folderName);
                     Enter_folder(folderName);
+                    system("clear");
+                    Print_Text(folderName);
                     break;
                 case 4:
                     break;
