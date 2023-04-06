@@ -157,7 +157,7 @@ void Enter_folder(char *foldername) // 폴더 이름 받아서 해당 폴더로 
     {
         printf("폴더 이동 실패");
     }
-    return 0;
+    return;
 
 }
 
