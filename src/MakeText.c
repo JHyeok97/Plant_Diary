@@ -137,7 +137,6 @@ int Get_Diary(int date, char description[])
 // 폴더 만드는 함수
 void Make_Folder(char foldername[]) // 표준 입력 장치로 받은 이름
 {
-    system("cd ../");
     if (mkdir(foldername, 0777) == 0) // 입력받은 이름으로 폴더를 생성한다(0777->읽기, 쓰기, 실행을 가능하게 하는 값.)
     {
         puts(foldername);

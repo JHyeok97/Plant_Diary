@@ -5,6 +5,8 @@
 #include <string.h>
 #include <sys/types.h>
 #include <sysexits.h>
+#include <sys/stat.h>
+#include <unistd.h>
 
 typedef struct Node
 {

@@ -27,6 +27,8 @@ int main()
                 {
                 case 1:
                     system("clear");
+                    chdir("..");
+                    chdir("store");
                     printf("추가할 폴더 이름을 입력하세요.\n");
                     scanf("%s", folderName);
                     Make_Folder(folderName);
