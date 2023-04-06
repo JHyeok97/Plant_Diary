@@ -145,9 +145,20 @@ int Make_Folder(char *foldername) // 표준 입력 장치로 받은 이름
     return 0;
 }
 
-void Enter_folder(char *foldername)
+void Enter_folder(char *foldername) // 폴더 이름 받아서 해당 폴더로 이동
 {
-    system("");
+    int result = chdir(foldername);//foldername 경로로 이동 
+
+    if(result==0)//정상적으로 함수가 작동할 시 0의 값을 반환함
+    {
+        printf("폴더 이동 성공");
+    }
+    else
+    {
+        printf("폴더 이동 실패");
+    }
+    return 0;
+
 }
 
 int Delete_folder(char *foldername)
