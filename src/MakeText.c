@@ -170,16 +170,16 @@ int Delete_folder(char foldername[])
     return 0;
 }
 
-int Delete_file(int *date)
+int Delete_file(char filename[])
 {
-    int Dfile = remove(date); // int 변수 Dfile에 remove 함수를 저장
-    if (Dfile == 0)           // remove 함수가 성공적으로 실행되었을 때 0의 값을 반환
+  
+    if (remove(filename) == 0)           
     {
-        printf("%s 파일 삭제 성공\n", date);
+        printf("%s 파일 삭제 성공\n", filename);
     }
     else
     {
-        printf("%s 파일 삭제 실패\n", date);
+        printf("%s 파일 삭제 실패\n", filename);
     }
     return 0;
 }

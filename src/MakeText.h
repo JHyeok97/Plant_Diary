@@ -20,4 +20,4 @@ int Make_Folder(char[]);
 int Delete_folder(char[]);
 int Enter_folder(char[]);
 int Find_List(char[]);
-int Delete_file(int*);
+int Delete_file(char[]);
