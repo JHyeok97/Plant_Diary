@@ -195,72 +195,62 @@ int Find_List_Select(int select)
     }
 }
 
-// 파일 디텍토리 출력 함수
-// 파일 위치 입력 시 . 입력 시 현재 dir 내 목록, 파일명 입력 시 현재 dir을 기준으로 dir 탐색 중첩 할 시 dir/dir/...
-int Find_List(char *foldername)
+int Find_List_dir(char foldername)
 {
     char file_name[256];
     char folder_path[256];
-    int select = 0;
-    
+
     // folder_path main 입력 된 파일 명 folder_path로 입력, size 크기 지정
     snprintf(folder_path, sizeof(folder_path), "%s", foldername);
 
     struct dirent *find_data;
     DIR *find_handle;
 
-    system("clear");
-    printf("\n1 : 폴더(dir)탐색\n2 : 파일(txt)탐색\n\n");
-    scanf("%d", &select);
-
-    system("clear"); // 입력 된 파일명 삭제 후 목록 값 출력을 위한 clear
-    //폴더(dir) 및 파일(.txt) 중 선택 된 방향으로 탐색 하도록 조건문 설정 아래 opendir의 반복문 형식은 dir,.txt 동일
-    switch (select)
-    {
-    case 1:
     // 입력 된 dir 파일명을 find_handle로 입력
-        find_handle = opendir(folder_path);
+    find_handle = opendir(folder_path);
 
-        if (find_handle == NULL) // find_handle 내 파일명(DIR 구조체의 d_name) 없는 경우
-        {
-            printf("파일 없음\n");
-            return 0;
-        }
-        while ((find_data = readdir(find_handle)) != NULL) // readdir 함수 #include <dirent.h> 된 find_handle 내 값의 dir을 출력
-        {
-            // file_name으로 find_data의 struct dirent의 구조체 파일명 관리(char) d_name의 값을 file name으로 입력
-            snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
-            if (strstr(file_name, ".") == NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
-            {
-                printf("%s\n폴더명(dir)\n%s\n", foldername, file_name);
-            }
-        }
-        closedir(find_handle); // 열린 dir을 닫아 주는 함수 DIR* find_handle로 지정 되어 find_handle 입력
-
-        return 0;
-
-    case 2:
-        find_handle = opendir(folder_path);
-
-        if (find_handle == NULL) // find_handle 내 파일명(DIR 구조체의 d_name) 없는 경우
-        {
-            printf("파일 없음\n");
-            return 0;
-        }
-        while ((find_data = readdir(find_handle)) != NULL) // readdir 함수 #include <dirent.h> 된 find_handle 내 값의 dir을 출력
-        {
-            // file_name으로 find_data의 struct dirent의 구조체 파일명 관리(char) d_name의 값을 file name으로 입력
-            snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
-            if (strstr(file_name, ".txt") != NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
-            {
-                printf("%s\n파일명(txt)\n%s\n", foldername, file_name);
-            }
-        }
-        closedir(find_handle); // 열린 dir을 닫아 주는 함수 DIR* find_handle로 지정 되어 find_handle 입력
-        return 0;              
-        
-    default :
-            printf("입력오류\n");
-            return 0;
+    if (find_handle == NULL) // find_handle 내 파일명(DIR 구조체의 d_name) 없는 경우
+    {
+        printf("파일 없음\n");
     }
+    while ((find_data = readdir(find_handle)) != NULL) // readdir 함수 #include <dirent.h> 된 find_handle 내 값의 dir을 출력
+    {
+        // file_name으로 find_data의 struct dirent의 구조체 파일명 관리(char) d_name의 값을 file name으로 입력
+        snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
+        if (strstr(file_name, ".") == NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
+        {
+            printf("%s\n", file_name);
+        }
+    }
+    closedir(find_handle); // 열린 dir을 닫아 주는 함수 DIR* find_handle로 지정 되어 find_handle 입력
+}
+
+int Find_List_txt(char foldername)
+{
+    char file_name[256];
+    char folder_path[256];
+
+    // folder_path main 입력 된 파일 명 folder_path로 입력, size 크기 지정
+    snprintf(folder_path, sizeof(folder_path), "%s", foldername);
+
+    struct dirent *find_data;
+    DIR *find_handle;
+
+    // 입력 된 dir 파일명을 find_handle로 입력
+    find_handle = opendir(folder_path);
+
+    if (find_handle == NULL) // find_handle 내 파일명(DIR 구조체의 d_name) 없는 경우
+    {
+        printf("파일 없음\n");
+    }
+    while ((find_data = readdir(find_handle)) != NULL) // readdir 함수 #include <dirent.h> 된 find_handle 내 값의 dir을 출력
+    {
+        // file_name으로 find_data의 struct dirent의 구조체 파일명 관리(char) d_name의 값을 file name으로 입력
+        snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
+        if (strstr(file_name, ".") == NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
+        {
+            printf("%s\n", file_name);
+        }
+    }
+    closedir(find_handle); // 열린 dir을 닫아 주는 함수 DIR* find_handle로 지정 되어 find_handle 입력
 }
