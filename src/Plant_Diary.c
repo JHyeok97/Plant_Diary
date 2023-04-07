@@ -22,7 +22,7 @@ int main()
             {
                 system("clear");
                 Print_folder();
-                Find_List(folderName);
+                Find_List_dir(folderName);
                 scanf("%d", &menu2);
 
                 switch (menu2)
@@ -48,7 +48,7 @@ int main()
                     {
                         system("clear");
                         Print_Text(folderName);
-                        Find_List(folderName);
+                        Find_List_txt(folderName);
                         scanf("%d", &menu3);
                         switch (menu3)
                         {
@@ -90,6 +90,7 @@ int main()
                     }
                     break;
                 case 4:
+                    chdir("..");
                     break;
                 default:
                     system("clear");

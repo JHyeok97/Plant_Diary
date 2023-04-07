@@ -19,4 +19,5 @@ int Get_Diary(int, char[]);
 int Make_Folder(char[]);
 int Delete_folder(char[]);
 int Enter_folder(char[]);
-int Find_List(char[]);
+int Find_List_dir(char[]);
+int Find_List_txt(char[]);
