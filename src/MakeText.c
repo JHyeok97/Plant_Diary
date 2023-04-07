@@ -170,10 +170,13 @@ int Delete_folder(char foldername[])
     return 0;
 }
 
-int Delete_file(char filename[])
+int Delete_file(int date)
 {
-  
-    if (remove(filename) == 0)           
+   char filename[20];
+
+    sprintf(filename, "%d", date);
+
+    if (remove(filename) == 0)
     {
         printf("%s 파일 삭제 성공\n", filename);
     }
