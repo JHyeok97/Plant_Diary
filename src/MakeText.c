@@ -73,10 +73,11 @@ void Scan_Description(char description[])
         description[index] = ch;
         index = strlen(description);
 
+        fflush(stdout);
         system("clear");
 
         printf(
-            "%s(%d/%d):%s",
+            "%s(%d/%d):\n%s",
             guide, index,
             MAX_LENGTH - 1, description);
 
@@ -125,7 +126,11 @@ int Get_Diary(int date, char description[])
         return 0;
     }
 
-    fgets(description, MAX_LENGTH, fp);
+    while (fgets(description, MAX_LENGTH, fp) != NULL)
+    {
+        printf("%s", description);
+    }
+
     fclose(fp);
 
     return 1;
@@ -178,28 +183,26 @@ int Delete_file(int date)
 {
     char filename[20];
 
-    sprintf(filename, "%d", date);
     system("clear");
+    sprintf(filename, "%d", date);
+    strcat(filename, ".txt");
 
     if (remove(filename) == 0)
     {
         printf("%s 파일 삭제 성공\n", filename);
+        return 0;
     }
     else
     {
         printf("%s 파일 삭제 실패\n", filename);
+        return 1;
     }
-    return 0;
 }
 
 int Find_List_dir(char foldername[])
 {
     char file_name[256];
     char folder_path[256];
-    // char file_location[4] = {"."};
-
-    // strcat(file_location, foldername);
-    // foldername = file_location;
 
     // folder_path main 입력 된 파일 명 folder_path로 입력, size 크기 지정
     snprintf(folder_path, sizeof(folder_path), "%s", foldername);
@@ -213,30 +216,26 @@ int Find_List_dir(char foldername[])
     if (find_handle == NULL) // find_handle 내 파일명(DIR 구조체의 d_name) 없는 경우
     {
         printf("파일 없음\n");
+        return 1;
     }
-    else
+
+    while ((find_data = readdir(find_handle)) != NULL)
     {
-        while ((find_data = readdir(find_handle)) != NULL) // readdir 함수 #include <dirent.h> 된 find_handle 내 값의 dir을 출력
+        snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
+        if (find_data->d_type == DT_DIR && strcmp(file_name, ".") != 0 && strcmp(file_name, "..") != 0)
         {
-            // file_name으로 find_data의 struct dirent의 구조체 파일명 관리(char) d_name의 값을 file name으로 입력
-            snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
-            if (strstr(file_name, ".c, .t") != NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
-            {
-                printf("%s\n", file_name);
-            }
+            printf("%s\n", file_name);
         }
     }
+
     closedir(find_handle); // 열린 dir을 닫아 주는 함수 DIR* find_handle로 지정 되어 find_handle 입력
+    return 0;
 }
 
 int Find_List_txt(char foldername[])
 {
     char file_name[256];
     char folder_path[256];
-    // char file_location[2] = {"."};
-
-    // strcat(file_location, foldername);
-    // foldername = file_location;
 
     // folder_path main 입력 된 파일 명 folder_path로 입력, size 크기 지정
     snprintf(folder_path, sizeof(folder_path), "%s", foldername);
@@ -251,17 +250,16 @@ int Find_List_txt(char foldername[])
     {
         printf("파일 없음\n");
     }
-    else
+
+    while ((find_data = readdir(find_handle)) != NULL) // readdir 함수 #include <dirent.h> 된 find_handle 내 값의 dir을 출력
     {
-        while ((find_data = readdir(find_handle)) != NULL) // readdir 함수 #include <dirent.h> 된 find_handle 내 값의 dir을 출력
+        // file_name으로 find_data의 struct dirent의 구조체 파일명 관리(char) d_name의 값을 file name으로 입력
+        snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
+        // if (strstr(file_name, ".txt") != NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
         {
-            // file_name으로 find_data의 struct dirent의 구조체 파일명 관리(char) d_name의 값을 file name으로 입력
-            snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
-            // if (strstr(file_name, ".txt") != NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
-            {
-                printf("%s", file_name);
-            }
+            printf("%s\n", file_name);
         }
     }
+
     closedir(find_handle); // 열린 dir을 닫아 주는 함수 DIR* find_handle로 지정 되어 find_handle 입력
 }

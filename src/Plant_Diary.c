@@ -21,7 +21,7 @@ int main()
                 system("clear");
                 chdir("store");
                 Print_folder();
-                Find_List_dir(folderName);
+                Find_List_dir(".");
                 scanf("%d", &menu2);
 
                 switch (menu2)
@@ -46,7 +46,7 @@ int main()
                     while (1)
                     {
                         Print_Text(folderName);
-                        Find_List_txt(folderName);
+                        Find_List_txt(".");
                         scanf("%d", &menu3);
                         switch (menu3)
                         {
@@ -61,6 +61,7 @@ int main()
                         case 2:
                             printf("삭제하고 싶은 날짜를 입력해주세요 (YYYY MM DD): ");
                             scanf("%d %d %d", &year, &month, &day);
+                            date = Get_Date_File_Name();
                             Delete_file(date);
                             break;
                             // 파일 삭제 함수 자리
