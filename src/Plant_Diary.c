@@ -60,6 +60,9 @@ int main()
                             printf("\n\n~~![%d.txt] 일기 작성 성공!~~\n\n", date);
                             break;
                         case 2:
+                            printf("삭제하고 싶은 날짜를 입력해주세요 (YYYY MM DD): ");
+                            scanf("%d %d %d", &year, &month, &day);
+                            // 파일 삭제 함수 자리
 
                         case 3:
                             printf("확인하고 싶은 날짜를 입력해주세요 (YYYY MM DD): ");
@@ -78,6 +81,7 @@ int main()
                             system("clear");
                             break;
                         case 4:
+                            chdir("..");
                             break;
 
                         default:
@@ -90,7 +94,6 @@ int main()
                     }
                     break;
                 case 4:
-                    chdir("..");
                     break;
                 default:
                     system("clear");
