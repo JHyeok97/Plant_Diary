@@ -31,13 +31,10 @@ void Print_folder(void)
 void Print_Text(char foldername[])
 {
     puts(" ");
-    puts(" ");
-    printf("\t\t");
-    puts(foldername);
-    puts(" ");
+    printf("\t\t%s\n", foldername);
     puts(" ");
 
-    puts("1. 식물 일기 작성\t2. 식물 일기 삭제\t3. 식물 일기 보기\t4. 이전 화면\n\n");
+    puts("1. 일기 작성\t2. 일기 삭제\t3. 이전 화면\n\n");
 }
 
 // 파일 이름 정하는 함수
@@ -64,7 +61,7 @@ void Scan_Description(char description[])
     int ch;
     unsigned int index = 0;
     char guide[] = "Enter 입력 및 MAX_LENGTH 까지 입력 시 종료";
-    const char *exit = "_";
+
     getchar();
     printf("%s(0/%d)\n", guide, MAX_LENGTH - 1);
 
@@ -85,12 +82,11 @@ void Scan_Description(char description[])
             printf("\nMAX_LENGTH 초과 저장 후 종료");
             break;
         }
-        else if (strstr(description, exit))
+        else if ((ch = getchar()) != '\n')
         {
             printf("\nEnter 입력, 저장 후 종료");
             break;
         }
-        system("clear");
     }
 
     description[index + 1] = '\0';
@@ -148,17 +144,17 @@ int Make_Folder(char foldername[]) // 표준 입력 장치로 받은 이름
     return 0;
 }
 
-int Enter_folder(char foldername[]) // 폴더 이름 받아서 해당 폴더로 이동
+int Enter_folder(char *foldername) // 폴더 이름 받아서 해당 폴더로 이동
 {
-    int result = chdir(foldername); // foldername 경로로 이동
+    // int result = chdir(foldername); // foldername 경로로 이동
 
-    if (result == 0) // 정상적으로 함수가 작동할 시 0의 값을 반환함
+    if (chdir(foldername) == 0) // 정상적으로 함수가 작동할 시 0의 값을 반환함
     {
-        printf("폴더 이동 성공");
+        printf("%s 폴더 이동 성공", foldername);
     }
     else
     {
-        printf("폴더 이동 실패");
+        printf("%s 폴더 이동 실패", foldername);
     }
     return 0;
 }
@@ -168,23 +164,22 @@ int Delete_folder(char foldername[])
     int result = rmdir(foldername);
     if (result == -1)
     {
-        printf("폴더 삭제 실패");
+        perror("폴더 삭제 실패");
         return 1;
     }
     return 0;
 }
 
-// 파일 디렉토리 출력 함수
-// 파일 위치 입력 시 . 입력 시 현재 dir 내 목록, 파일명 입력 시 현재 dir을 기준으로 dir 탐색 중첩 할 시 dir/dir/...
-int Find_List(char foldername[])
+int Delete_file(int *date)
 {
-    char file_name[256];
-    char folder_path[256];
-    int select = 0;
-
-    // folder_path main 입력 된 파일 명 folder_path로 입력, size 크기 지정
-    snprintf(folder_path, sizeof(folder_path), "%s", foldername);
-
-    struct dirent *find_data;
-    DIR *find_handle;
+    int Dfile = remove(date); // int 변수 Dfile에 remove 함수를 저장
+    if (Dfile == 0)           // remove 함수가 성공적으로 실행되었을 때 0의 값을 반환
+    {
+        printf("%s 파일 삭제 성공\n", date);
+    }
+    else
+    {
+        printf("%s 파일 삭제 실패\n", date);
+    }
+    return 0;
 }
