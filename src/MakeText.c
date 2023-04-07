@@ -1,7 +1,5 @@
 #include "MakeText.h"
 
-#define MAX_LENGTH 1000
-
 // 첫 페이지 프린트 하는 함수
 void Print_Title(void)
 {
@@ -63,7 +61,7 @@ void Scan_Description(char description[])
 {
     int ch;
     unsigned int index = 0;
-    char guide[] = "Enter 입력 및 MAX_LENGTH 까지 입력 시 종료";
+    char guide[] = "일기를 입력하세요. (종료하려면 _ 입력 후 Enter.)";
     const char *exit = "_";
 
     getchar();
@@ -76,6 +74,7 @@ void Scan_Description(char description[])
         index = strlen(description);
 
         system("clear");
+
         printf(
             "%s(%d/%d):%s",
             guide, index,
@@ -83,7 +82,7 @@ void Scan_Description(char description[])
 
         if (index + 1 == MAX_LENGTH - 1)
         {
-            printf("\nMAX_LENGTH 초과 저장 후 종료");
+            printf("\n글자 제한을 초과하여 작성을 종료하고 저장합니다.");
             break;
         }
         else if (strstr(description, exit))
@@ -93,7 +92,7 @@ void Scan_Description(char description[])
         }
     }
 
-    description[index] = '\0';
+    description[index + 1] = '\0';
 }
 
 // 일기를 txt 파일에 저장하는 함수
@@ -174,10 +173,33 @@ int Delete_folder(char foldername[])
     return 0;
 }
 
+// txt 파일 삭제 함수
+int Delete_file(int date)
+{
+    char filename[20];
+
+    sprintf(filename, "%d", date);
+    system("clear");
+
+    if (remove(filename) == 0)
+    {
+        printf("%s 파일 삭제 성공\n", filename);
+    }
+    else
+    {
+        printf("%s 파일 삭제 실패\n", filename);
+    }
+    return 0;
+}
+
 int Find_List_dir(char foldername[])
 {
     char file_name[256];
     char folder_path[256];
+    // char file_location[4] = {"."};
+
+    // strcat(file_location, foldername);
+    // foldername = file_location;
 
     // folder_path main 입력 된 파일 명 folder_path로 입력, size 크기 지정
     snprintf(folder_path, sizeof(folder_path), "%s", foldername);
@@ -186,7 +208,7 @@ int Find_List_dir(char foldername[])
     DIR *find_handle;
 
     // 입력 된 dir 파일명을 find_handle로 입력
-    find_handle = opendir(folder_path);
+    find_handle = opendir(foldername);
 
     if (find_handle == NULL) // find_handle 내 파일명(DIR 구조체의 d_name) 없는 경우
     {
@@ -198,7 +220,7 @@ int Find_List_dir(char foldername[])
         {
             // file_name으로 find_data의 struct dirent의 구조체 파일명 관리(char) d_name의 값을 file name으로 입력
             snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
-            if (strstr(file_name, ".") == NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
+            if (strstr(file_name, ".c, .t") != NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
             {
                 printf("%s\n", file_name);
             }
@@ -211,6 +233,10 @@ int Find_List_txt(char foldername[])
 {
     char file_name[256];
     char folder_path[256];
+    // char file_location[2] = {"."};
+
+    // strcat(file_location, foldername);
+    // foldername = file_location;
 
     // folder_path main 입력 된 파일 명 folder_path로 입력, size 크기 지정
     snprintf(folder_path, sizeof(folder_path), "%s", foldername);
@@ -219,7 +245,7 @@ int Find_List_txt(char foldername[])
     DIR *find_handle;
 
     // 입력 된 dir 파일명을 find_handle로 입력
-    find_handle = opendir(folder_path);
+    find_handle = opendir(foldername);
 
     if (find_handle == NULL) // find_handle 내 파일명(DIR 구조체의 d_name) 없는 경우
     {
@@ -231,9 +257,9 @@ int Find_List_txt(char foldername[])
         {
             // file_name으로 find_data의 struct dirent의 구조체 파일명 관리(char) d_name의 값을 file name으로 입력
             snprintf(file_name, sizeof(file_name), "%s", find_data->d_name);
-            if (strstr(file_name, ".") == NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
+            // if (strstr(file_name, ".txt") != NULL) // ststr 문자열을 조합하는 함수 입력 받은 file_name과 ".txt"를 병합하여 dir 내 *.txt만을 출력하도록 조건 입력
             {
-                puts(file_name);
+                printf("%s", file_name);
             }
         }
     }

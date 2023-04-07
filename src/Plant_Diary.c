@@ -1,7 +1,5 @@
 #include "MakeText.h"
 
-#define MAX_LENGTH 1000
-
 int main()
 {
     int menu1, menu2, menu3, date, year, month, day;
@@ -21,6 +19,7 @@ int main()
             while (1)
             {
                 system("clear");
+                chdir("store");
                 Print_folder();
                 Find_List_dir(folderName);
                 scanf("%d", &menu2);
@@ -29,7 +28,6 @@ int main()
                 {
                 case 1:
                     system("clear");
-                    chdir("store");
                     printf("추가할 폴더 이름을 입력하세요.\n");
                     scanf("%s", folderName);
                     Make_Folder(folderName);
@@ -39,20 +37,21 @@ int main()
                     scanf("%s", folderName);
                     Delete_folder(folderName);
                     break;
-                case 3: // 폴더 입력하면 들어가는 함수 만들기
+                case 3: // 폴더 입력하면 들어감
                     printf("원하는 폴더 이름을 입력하세요.\n");
                     scanf("%s", folderName);
                     Enter_folder(folderName);
+                    system("clear");
 
                     while (1)
                     {
-                        system("clear");
                         Print_Text(folderName);
                         Find_List_txt(folderName);
                         scanf("%d", &menu3);
                         switch (menu3)
                         {
                         case 1:
+                            system("clear");
                             Scan_Description(description);
                             date = Get_Date_File_Name();
                             Put_Diary(date, description);
@@ -62,6 +61,8 @@ int main()
                         case 2:
                             printf("삭제하고 싶은 날짜를 입력해주세요 (YYYY MM DD): ");
                             scanf("%d %d %d", &year, &month, &day);
+                            Delete_file(date);
+                            break;
                             // 파일 삭제 함수 자리
 
                         case 3:

@@ -9,6 +9,8 @@
 #include <unistd.h>
 #include <dirent.h>
 
+#define MAX_LENGTH 1000
+
 void Print_Title();
 void Print_folder();
 void Print_Text(char[]);
@@ -21,3 +23,4 @@ int Delete_folder(char[]);
 int Enter_folder(char[]);
 int Find_List_dir(char[]);
 int Find_List_txt(char[]);
+int Delete_file(int);
