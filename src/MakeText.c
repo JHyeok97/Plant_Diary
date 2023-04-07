@@ -28,14 +28,16 @@ void Print_folder(void)
 }
 
 // 텍스트를 프린트하는 함수
-void Print_Text(char *folder_name)
+void Print_Text(char foldername[])
 {
-
     puts(" ");
-    printf("\t\t%s\n", folder_name);
+    puts(" ");
+    printf("\t\t");
+    puts(foldername);
+    puts(" ");
     puts(" ");
 
-    puts("1. 일기 작성\t2. 일기 삭제\t3. 이전 화면\n\n");
+    puts("1. 식물 일기 작성\t2. 식물 일기 삭제\t3. 식물 일기 보기\t4. 이전 화면\n\n");
 }
 
 // 파일 이름 정하는 함수
@@ -62,7 +64,7 @@ void Scan_Description(char description[])
     int ch;
     unsigned int index = 0;
     char guide[] = "Enter 입력 및 MAX_LENGTH 까지 입력 시 종료";
-
+    const char *exit = "_";
     getchar();
     printf("%s(0/%d)\n", guide, MAX_LENGTH - 1);
 
@@ -83,11 +85,12 @@ void Scan_Description(char description[])
             printf("\nMAX_LENGTH 초과 저장 후 종료");
             break;
         }
-        else if ((ch = getchar()) != '\n')
+        else if (strstr(description, exit))
         {
             printf("\nEnter 입력, 저장 후 종료");
             break;
         }
+        system("clear");
     }
 
     description[index + 1] = '\0';
@@ -165,8 +168,23 @@ int Delete_folder(char foldername[])
     int result = rmdir(foldername);
     if (result == -1)
     {
-        perror("폴더 삭제 실패");
+        printf("폴더 삭제 실패");
         return 1;
     }
     return 0;
+}
+
+// 파일 디렉토리 출력 함수
+// 파일 위치 입력 시 . 입력 시 현재 dir 내 목록, 파일명 입력 시 현재 dir을 기준으로 dir 탐색 중첩 할 시 dir/dir/...
+int Find_List(char foldername[])
+{
+    char file_name[256];
+    char folder_path[256];
+    int select = 0;
+
+    // folder_path main 입력 된 파일 명 folder_path로 입력, size 크기 지정
+    snprintf(folder_path, sizeof(folder_path), "%s", foldername);
+
+    struct dirent *find_data;
+    DIR *find_handle;
 }

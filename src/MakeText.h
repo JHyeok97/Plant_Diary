@@ -7,16 +7,11 @@
 #include <sysexits.h>
 #include <sys/stat.h>
 #include <unistd.h>
-
-typedef struct Node
-{
-    char *name;
-    struct Node *next;
-} Node;
+#include <dirent.h>
 
 void Print_Title();
 void Print_folder();
-void Print_Text(char *);
+void Print_Text(char[]);
 int Get_Date_File_Name();
 void Scan_Description(char[]);
 void Put_Diary(int, char[]);
@@ -24,7 +19,4 @@ int Get_Diary(int, char[]);
 int Make_Folder(char[]);
 int Delete_folder(char[]);
 int Enter_folder(char[]);
-void Add(char *);
-void Delete(char *);
-void List();
-// void txt_Edit();
+int Find_List(char[]);

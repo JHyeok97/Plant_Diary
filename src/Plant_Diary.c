@@ -22,7 +22,7 @@ int main()
             {
                 system("clear");
                 Print_folder();
-                // 폴더 리스트 출력 추가할 자리
+                Find_List(folderName);
                 scanf("%d", &menu2);
 
                 switch (menu2)
@@ -43,8 +43,51 @@ int main()
                     printf("원하는 폴더 이름을 입력하세요.\n");
                     scanf("%s", folderName);
                     Enter_folder(folderName);
-                    system("clear");
-                    Print_Text(folderName);
+
+                    while (1)
+                    {
+                        system("clear");
+                        Print_Text(folderName);
+                        Find_List(folderName);
+                        scanf("%d", &menu3);
+                        switch (menu3)
+                        {
+                        case 1:
+                            Scan_Description(description);
+                            date = Get_Date_File_Name();
+                            Put_Diary(date, description);
+                            system("clear");
+                            printf("\n\n~~![%d.txt] 일기 작성 성공!~~\n\n", date);
+                            break;
+                        case 2:
+
+                        case 3:
+                            printf("확인하고 싶은 날짜를 입력해주세요 (YYYY MM DD): ");
+                            scanf("%d %d %d", &year, &month, &day);
+                            system("clear");
+                            date = (year * 10000 + month * 100 + day);
+
+                            if (Get_Diary(date, description))
+                                printf("\n\n%d.txt의 정보:\n%s\n\n(그만 보려면 아무 키나 누르세요.)", date, description);
+
+                            else
+                                puts("그 날에는 일기를 작성하지 않았습니다\n(아무 키나 눌러 이전 화면으로 돌아가기.)\n");
+
+                            getchar();
+                            getchar();
+                            system("clear");
+                            break;
+                        case 4:
+                            break;
+
+                        default:
+                            puts("잘못된 번호를 입력하셨습니다. 다시 입력해주세요.");
+                            system("clear");
+                            break;
+                        }
+                        if (menu3 == 4)
+                            break;
+                    }
                     break;
                 case 4:
                     break;
